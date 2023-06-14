@@ -13,13 +13,29 @@ fun PagerState.FSyncIndex(
     index: MutableState<Int>,
     anim: Boolean = false,
 ) {
+    FSyncIndex(
+        index = index.value,
+        anim = anim,
+        onChange = {
+            index.value = it
+        },
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun PagerState.FSyncIndex(
+    index: Int,
+    anim: Boolean = false,
+    onChange: (Int) -> Unit,
+) {
     val pagerState = this
-    LaunchedEffect(pagerState, index.value) {
-        if (pagerState.targetPage != index.value) {
+    LaunchedEffect(pagerState, index) {
+        if (pagerState.targetPage != index) {
             if (anim) {
-                pagerState.animateScrollToPage(index.value)
+                pagerState.animateScrollToPage(index)
             } else {
-                pagerState.scrollToPage(index.value)
+                pagerState.scrollToPage(index)
             }
         }
     }
@@ -27,7 +43,7 @@ fun PagerState.FSyncIndex(
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }
             .collect {
-                index.value = it
+                onChange(it)
             }
     }
 }
