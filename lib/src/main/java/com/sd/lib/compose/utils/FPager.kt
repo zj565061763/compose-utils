@@ -4,8 +4,15 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
 
+/**
+ * [PagerState]设置为[index]的位置
+ *
+ * @param onChange 回调[PagerState]的位置变化
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PagerState.FSyncIndex(
@@ -14,6 +21,8 @@ fun PagerState.FSyncIndex(
     onChange: (Int) -> Unit,
 ) {
     val pagerState = this
+    val onChangeUpdated by rememberUpdatedState(onChange)
+
     LaunchedEffect(pagerState, index) {
         if (pagerState.targetPage != index) {
             if (anim) {
@@ -27,7 +36,7 @@ fun PagerState.FSyncIndex(
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }
             .collect {
-                onChange(it)
+                onChangeUpdated(it)
             }
     }
 }
