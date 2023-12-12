@@ -4,8 +4,15 @@ import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
+/**
+ * 是否触摸的状态
+ */
 @Composable
 fun InteractionSource.fCollectIsTouchedAsState(): State<Boolean> {
     val isTouched = remember { mutableStateOf(false) }
