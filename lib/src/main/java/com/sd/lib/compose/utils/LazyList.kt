@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 
 fun LazyListScope.fItem(
     key: Any,
-    contentType: Any,
+    contentType: Any = key,
     content: @Composable LazyItemScope.() -> Unit,
 ) {
     item(
@@ -20,7 +20,7 @@ fun LazyListScope.fItem(
 @OptIn(ExperimentalFoundationApi::class)
 fun LazyListScope.fStickyHeader(
     key: Any,
-    contentType: Any,
+    contentType: Any = key,
     content: @Composable LazyItemScope.() -> Unit,
 ) {
     stickyHeader(

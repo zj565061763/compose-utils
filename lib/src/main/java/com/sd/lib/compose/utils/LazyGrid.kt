@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 
 fun LazyGridScope.fItem(
     key: Any,
-    contentType: Any,
+    contentType: Any = key,
     span: (LazyGridItemSpanScope.() -> GridItemSpan)? = { GridItemSpan(maxLineSpan) },
     content: @Composable LazyGridItemScope.() -> Unit,
 ) {
