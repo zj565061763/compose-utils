@@ -5,25 +5,27 @@ import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 
-fun LazyListScope.fKeyedItem(
+fun LazyListScope.fItem(
     key: Any,
+    contentType: Any,
     content: @Composable LazyItemScope.() -> Unit,
 ) {
     item(
         key = key,
-        contentType = key,
+        contentType = contentType,
         content = content,
     )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-fun LazyListScope.fKeyedStickyHeader(
+fun LazyListScope.fStickyHeader(
     key: Any,
+    contentType: Any,
     content: @Composable LazyItemScope.() -> Unit,
 ) {
     stickyHeader(
         key = key,
-        contentType = key,
+        contentType = contentType,
         content = content,
     )
 }

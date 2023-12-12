@@ -6,14 +6,15 @@ import androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.runtime.Composable
 
-fun LazyGridScope.fKeyedItem(
+fun LazyGridScope.fItem(
     key: Any,
+    contentType: Any,
     span: (LazyGridItemSpanScope.() -> GridItemSpan)? = { GridItemSpan(maxLineSpan) },
     content: @Composable LazyGridItemScope.() -> Unit,
 ) {
     item(
         key = key,
-        contentType = key,
+        contentType = contentType,
         span = span,
         content = content,
     )
