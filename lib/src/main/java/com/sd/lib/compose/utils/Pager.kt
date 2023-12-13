@@ -1,5 +1,6 @@
 package com.sd.lib.compose.utils
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
@@ -9,34 +10,41 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
 
 /**
- * [PagerState]设置为[index]的位置
- *
- * @param onChange 回调[PagerState]的位置变化
+ * 滚动到指定[page]
  */
+@SuppressLint("ComposableNaming")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PagerState.FSyncIndex(
-    index: Int,
+fun PagerState.fScrollToPage(
+    page: Int,
     anim: Boolean = false,
-    onChange: (Int) -> Unit,
 ) {
-    val pagerState = this
-    val onChangeUpdated by rememberUpdatedState(onChange)
-
-    LaunchedEffect(pagerState, index) {
-        if (pagerState.targetPage != index) {
+    val state = this
+    LaunchedEffect(state, page) {
+        if (state.targetPage != page) {
             if (anim) {
-                pagerState.animateScrollToPage(index)
+                state.animateScrollToPage(page)
             } else {
-                pagerState.scrollToPage(index)
+                state.scrollToPage(page)
             }
         }
     }
+}
 
-    LaunchedEffect(pagerState) {
-        snapshotFlow { pagerState.currentPage }
-            .collect {
-                onChangeUpdated(it)
-            }
+/**
+ * 监听[PagerState.currentPage]
+ */
+@SuppressLint("ComposableNaming")
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun PagerState.fCurrentPage(
+    onChange: (Int) -> Unit,
+) {
+    val state = this
+    val onChangeUpdated by rememberUpdatedState(onChange)
+    LaunchedEffect(state) {
+        snapshotFlow { state.currentPage }.collect {
+            onChangeUpdated(it)
+        }
     }
 }
