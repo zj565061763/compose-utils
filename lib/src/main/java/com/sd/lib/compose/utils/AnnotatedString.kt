@@ -9,7 +9,7 @@ fun String.fAnnotatedWithTarget(
     targetBlock: AnnotatedString.Builder.(String) -> Unit,
 ): AnnotatedString {
     val content = this@fAnnotatedWithTarget
-    val list = splitFully(
+    val list = splitWithTarget(
         target = target,
         ignoreCase = ignoreCase,
     )
@@ -29,7 +29,7 @@ fun String.fAnnotatedWithTarget(
     }
 }
 
-private fun String.splitFully(
+private fun String.splitWithTarget(
     target: String,
     ignoreCase: Boolean = false,
 ): List<String> {
