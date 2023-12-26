@@ -1,5 +1,6 @@
 package com.sd.demo.compose_utils
 
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 /**
@@ -10,12 +11,24 @@ import org.junit.Test
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        val content = "1xxx1xxx1x"
-        kotlin.run {
-            val list = content.splitWithDelimiter("1")
-            println(list)
+        "1".splitWithDelimiter("1").let { list ->
+            listOf("1").assertContentEquals(list)
         }
     }
+}
+
+private fun List<*>.assertContentEquals(other: List<*>) {
+    assertEquals(true, this.contentEquals(other))
+}
+
+private fun List<*>.contentEquals(other: List<*>): Boolean {
+    if (this.size != other.size) return false
+    for (index in this.indices) {
+        if (this[index] != other[index]) {
+            return false
+        }
+    }
+    return true
 }
 
 private fun CharSequence.splitWithDelimiter(
