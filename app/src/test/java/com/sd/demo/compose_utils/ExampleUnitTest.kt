@@ -11,6 +11,10 @@ import org.junit.Test
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
+        "".splitWithDelimiter("1").let { list ->
+            listOf("").assertContentEquals(list)
+        }
+
         "1".splitWithDelimiter("1").let { list ->
             listOf("1").assertContentEquals(list)
         }
