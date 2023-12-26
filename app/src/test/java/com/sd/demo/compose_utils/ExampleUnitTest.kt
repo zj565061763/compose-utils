@@ -18,6 +18,10 @@ class ExampleUnitTest {
         "1".splitWithDelimiter("1").let { list ->
             listOf("1").assertContentEquals(list)
         }
+
+        "111".splitWithDelimiter("1").let { list ->
+            listOf("1", "1", "1").assertContentEquals(list)
+        }
     }
 }
 
