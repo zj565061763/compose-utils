@@ -33,6 +33,7 @@ private fun String.splitFully(
     target: String,
     ignoreCase: Boolean = false,
 ): List<String> {
+    if (this == target) return listOf(this)
     val list = split(target, ignoreCase = ignoreCase)
     if (list.isEmpty()) return emptyList()
     if (list.size == 1) {
