@@ -3,24 +3,20 @@ package com.sd.lib.compose.utils
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
-fun String.fAnnotatedWithTarget(
+fun String.fAnnotatedTarget(
     target: String,
     ignoreCase: Boolean = false,
     targetBlock: AnnotatedString.Builder.(String) -> Unit,
 ): AnnotatedString {
-    val content = this@fAnnotatedWithTarget
-    val list = splitWithTarget(
-        target = target,
-        ignoreCase = ignoreCase,
-    )
+    val content = this@fAnnotatedTarget
+    val list = splitWithDelimiter(target, ignoreCase)
     return buildAnnotatedString {
-        val builder = this@buildAnnotatedString
         if (list.isEmpty()) {
             append(content)
         } else {
             list.forEach { item ->
                 if (item == target) {
-                    builder.targetBlock(target)
+                    targetBlock(target)
                 } else {
                     append(item)
                 }
@@ -29,27 +25,34 @@ fun String.fAnnotatedWithTarget(
     }
 }
 
-private fun String.splitWithTarget(
-    target: String,
-    ignoreCase: Boolean = false,
+private fun CharSequence.splitWithDelimiter(
+    delimiter: String,
+    ignoreCase: Boolean,
 ): List<String> {
-    if (this == target) return listOf(this)
-    val list = split(target, ignoreCase = ignoreCase)
-    if (list.isEmpty()) return emptyList()
-    if (list.size == 1) {
-        val item = list.first()
-        if (item == this) return emptyList()
+    var currentOffset = 0
+    var nextIndex = indexOf(delimiter, currentOffset, ignoreCase)
+    if (nextIndex == -1) {
+        return listOf(this.toString())
     }
-    return mutableListOf<String>().apply {
-        list.forEachIndexed { index, item ->
-            if (item.isEmpty()) {
-                add(target)
-            } else {
-                add(item)
-                if (index != list.lastIndex) {
-                    add(target)
-                }
-            }
+
+    if (nextIndex == 0 && length == delimiter.length) {
+        return listOf(this.toString())
+    }
+
+    val result = ArrayList<String>(10)
+    do {
+        val substring = substring(currentOffset, nextIndex)
+        if (substring.isNotEmpty()) {
+            result.add(substring)
         }
+        result.add(delimiter)
+        currentOffset = nextIndex + delimiter.length
+        nextIndex = indexOf(delimiter, currentOffset, ignoreCase)
+    } while (nextIndex != -1)
+
+    val substring = substring(currentOffset, length)
+    if (substring.isNotEmpty()) {
+        result.add(substring)
     }
+    return result
 }
