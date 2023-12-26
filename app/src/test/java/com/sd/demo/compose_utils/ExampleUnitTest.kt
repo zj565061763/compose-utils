@@ -10,7 +10,7 @@ import org.junit.Test
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
+    fun splitWithDelimiterTest() {
         "".splitWithDelimiter("1").let { list ->
             listOf("").assertContentEquals(list)
         }
