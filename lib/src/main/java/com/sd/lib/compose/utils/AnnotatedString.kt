@@ -6,6 +6,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 fun String.fAnnotatedTarget(
     target: String,
     ignoreCase: Boolean = false,
+    normalBlock: AnnotatedString.Builder.(String) -> Unit = { append(it) },
     targetBlock: AnnotatedString.Builder.(String) -> Unit,
 ): AnnotatedString {
     val content = this@fAnnotatedTarget
@@ -18,7 +19,7 @@ fun String.fAnnotatedTarget(
                 if (item == target) {
                     targetBlock(target)
                 } else {
-                    append(item)
+                    normalBlock(item)
                 }
             }
         }
