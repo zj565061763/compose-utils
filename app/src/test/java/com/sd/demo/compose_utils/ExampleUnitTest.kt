@@ -15,6 +15,10 @@ class ExampleUnitTest {
             listOf("").assertContentEquals(list)
         }
 
+        "a".splitWithDelimiter("1").let { list ->
+            listOf("a").assertContentEquals(list)
+        }
+
         "1".splitWithDelimiter("1").let { list ->
             listOf("1").assertContentEquals(list)
         }
@@ -25,6 +29,14 @@ class ExampleUnitTest {
 
         "1xx".splitWithDelimiter("1").let { list ->
             listOf("1", "xx").assertContentEquals(list)
+        }
+
+        "xx1".splitWithDelimiter("1").let { list ->
+            listOf("xx", "1").assertContentEquals(list)
+        }
+
+        "xx1xx".splitWithDelimiter("1").let { list ->
+            listOf("xx", "1", "xx").assertContentEquals(list)
         }
     }
 }
