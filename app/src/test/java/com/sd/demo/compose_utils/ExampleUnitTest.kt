@@ -38,6 +38,18 @@ class ExampleUnitTest {
         "xx1xx".splitWithDelimiter("1").let { list ->
             listOf("xx", "1", "xx").assertContentEquals(list)
         }
+
+        "1xx1xx".splitWithDelimiter("1").let { list ->
+            listOf("1", "xx", "1", "xx").assertContentEquals(list)
+        }
+
+        "xx1xx1".splitWithDelimiter("1").let { list ->
+            listOf("xx", "1", "xx", "1").assertContentEquals(list)
+        }
+
+        "1xx1xx1".splitWithDelimiter("1").let { list ->
+            listOf("1", "xx", "1", "xx", "1").assertContentEquals(list)
+        }
     }
 }
 
