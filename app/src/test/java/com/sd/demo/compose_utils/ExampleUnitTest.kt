@@ -53,20 +53,6 @@ class ExampleUnitTest {
     }
 }
 
-private fun List<*>.assertContentEquals(other: List<*>) {
-    assertEquals(true, this.contentEquals(other))
-}
-
-private fun List<*>.contentEquals(other: List<*>): Boolean {
-    if (this.size != other.size) return false
-    for (index in this.indices) {
-        if (this[index] != other[index]) {
-            return false
-        }
-    }
-    return true
-}
-
 private fun CharSequence.splitWithDelimiter(
     delimiter: String,
     ignoreCase: Boolean = false,
@@ -97,4 +83,18 @@ private fun CharSequence.splitWithDelimiter(
         result.add(substring)
     }
     return result
+}
+
+private fun List<*>.assertContentEquals(other: List<*>) {
+    assertEquals(true, this.contentEquals(other))
+}
+
+private fun List<*>.contentEquals(other: List<*>): Boolean {
+    if (this.size != other.size) return false
+    for (index in this.indices) {
+        if (this[index] != other[index]) {
+            return false
+        }
+    }
+    return true
 }
