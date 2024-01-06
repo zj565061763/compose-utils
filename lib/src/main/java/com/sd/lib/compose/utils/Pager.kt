@@ -48,3 +48,21 @@ fun PagerState.fCurrentPage(
         }
     }
 }
+
+/**
+ * 监听[PagerState.settledPage]
+ */
+@SuppressLint("ComposableNaming")
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun PagerState.fSettledPage(
+    onChange: (Int) -> Unit,
+) {
+    val state = this
+    val onChangeUpdated by rememberUpdatedState(onChange)
+    LaunchedEffect(state) {
+        snapshotFlow { state.settledPage }.collect {
+            onChangeUpdated(it)
+        }
+    }
+}
