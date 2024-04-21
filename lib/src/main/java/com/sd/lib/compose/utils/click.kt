@@ -17,7 +17,7 @@ fun Modifier.fClick(
     onClickLabel: String? = null,
     role: Role? = null,
     onClick: () -> Unit,
-) = composed {
+) = this.composed {
     clickable(
         interactionSource = interactionSource ?: remember { MutableInteractionSource() },
         indication = indication,
@@ -39,7 +39,7 @@ fun Modifier.fCombinedClick(
     onLongClick: (() -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
     onClick: () -> Unit,
-) = composed {
+) = this.composed {
     combinedClickable(
         interactionSource = interactionSource ?: remember { MutableInteractionSource() },
         indication = indication,
