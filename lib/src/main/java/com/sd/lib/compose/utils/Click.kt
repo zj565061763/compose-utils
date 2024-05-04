@@ -10,6 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.semantics.Role
 
+/**
+ * 点击事件，不带涟漪效果
+ */
 fun Modifier.fClick(
     interactionSource: MutableInteractionSource? = null,
     indication: Indication? = null,
@@ -28,6 +31,9 @@ fun Modifier.fClick(
     )
 }
 
+/**
+ * 点击事件，不带涟漪效果
+ */
 @OptIn(ExperimentalFoundationApi::class)
 fun Modifier.fCombinedClick(
     interactionSource: MutableInteractionSource? = null,
