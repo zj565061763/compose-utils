@@ -3,6 +3,10 @@ package com.sd.lib.compose.utils
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
+/**
+ * 把当前字符串根据[target]拆分并构建为[AnnotatedString]，非[target]部分调用[normalBlock]组装,
+ * [target]部分调用[targetBlock]组装
+ */
 fun String.fAnnotatedTarget(
     target: String,
     ignoreCase: Boolean = false,
