@@ -11,31 +11,38 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 
+/**
+ * 把[items]拼接为字符串，如果[items]为空返回空字符串，[items]内容对应的字符串规则如下：
+ * * null -> 空字符串
+ * * String -> 字符串本身
+ * * Int -> 当作字符串资源ID读取字符串
+ * * 其他 -> 调用对象的toString()
+ */
 @Composable
-fun fResString(vararg items: Any): String {
+fun fString(vararg items: Any): String {
     val resources = resources()
     return when (items.size) {
         0 -> ""
-        1 -> items.first().anyToResString(resources)
+        1 -> items.first().anyToString(resources)
         else -> {
-            var result by remember { mutableStateOf(items.itemsToResString(resources)) }
+            var result by remember { mutableStateOf(items.itemsToString(resources)) }
             LaunchedEffect(items) {
-                result = items.itemsToResString(resources)
+                result = items.itemsToString(resources)
             }
             result
         }
     }
 }
 
-private fun Array<*>.itemsToResString(resources: Resources): String {
+private fun Array<*>.itemsToString(resources: Resources): String {
     return buildString {
-        for (item in this@itemsToResString) {
-            append(item.anyToResString(resources))
+        for (item in this@itemsToString) {
+            append(item.anyToString(resources))
         }
     }
 }
 
-private fun Any?.anyToResString(resources: Resources): String {
+private fun Any?.anyToString(resources: Resources): String {
     return when (this) {
         null -> ""
         is String -> this
