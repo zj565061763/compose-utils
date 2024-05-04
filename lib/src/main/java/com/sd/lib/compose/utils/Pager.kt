@@ -17,16 +17,28 @@ import androidx.compose.runtime.snapshotFlow
 @Composable
 fun PagerState.fScrollToPage(
     page: Int,
-    anim: Boolean = false,
 ) {
     val state = this
     LaunchedEffect(state, page) {
         if (state.targetPage != page) {
-            if (anim) {
-                state.animateScrollToPage(page)
-            } else {
-                state.scrollToPage(page)
-            }
+            state.scrollToPage(page)
+        }
+    }
+}
+
+/**
+ * 动画滚动到指定[page]
+ */
+@SuppressLint("ComposableNaming")
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun PagerState.fAnimateScrollToPage(
+    page: Int,
+) {
+    val state = this
+    LaunchedEffect(state, page) {
+        if (state.targetPage != page) {
+            state.animateScrollToPage(page)
         }
     }
 }
