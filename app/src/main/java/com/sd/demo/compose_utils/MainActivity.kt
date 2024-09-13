@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
             Content(
                listActivity = listOf(
                   SampleAnnotatedTarget::class.java,
+                  SampleCarousel::class.java,
                   SampleClick::class.java,
                ),
                onClickActivity = {

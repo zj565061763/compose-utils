@@ -18,6 +18,8 @@ fun <T> FCarouselVertical(
    modifier: Modifier = Modifier,
    /** 列表 */
    list: List<T>,
+   /** 切换间隔 */
+   interval: Long = 3000,
    /** 切换动画时长 */
    duration: Int = 1000,
    /** 内容 */
@@ -25,11 +27,11 @@ fun <T> FCarouselVertical(
 ) {
    fLoopTarget(
       list = list,
-      onLoop = { delay(duration.toLong()) }
-   ).value?.let { item ->
+      onLoop = { delay(interval) },
+   ).value?.let { target ->
       FCarouselVertical(
          modifier = modifier,
-         target = item,
+         target = target,
          duration = duration,
          content = content,
       )
