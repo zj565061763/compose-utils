@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
          AppTheme {
             Content(
                listActivity = listOf(
+                  SampleAnnotatedTarget::class.java,
                   SampleClick::class.java,
                ),
                onClickActivity = {
