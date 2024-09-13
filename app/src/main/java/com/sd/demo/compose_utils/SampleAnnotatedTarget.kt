@@ -33,7 +33,7 @@ class SampleAnnotatedTarget : ComponentActivity() {
 @Composable
 private fun Content(
    modifier: Modifier = Modifier,
-   content: String = "123456789 123456789 123456789 123456789",
+   content: String = "123456789-123456789-123456789-123456789",
    target: String = "456",
 ) {
    val annotated = remember(content, target) {
