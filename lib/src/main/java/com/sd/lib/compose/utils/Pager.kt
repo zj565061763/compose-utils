@@ -16,14 +16,14 @@ import androidx.compose.runtime.snapshotFlow
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PagerState.fScrollToPage(
-    page: Int,
+   page: Int,
 ) {
-    val state = this
-    LaunchedEffect(state, page) {
-        if (state.targetPage != page) {
-            state.scrollToPage(page)
-        }
-    }
+   val state = this
+   LaunchedEffect(state, page) {
+      if (state.targetPage != page) {
+         state.scrollToPage(page)
+      }
+   }
 }
 
 /**
@@ -33,14 +33,14 @@ fun PagerState.fScrollToPage(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PagerState.fAnimateScrollToPage(
-    page: Int,
+   page: Int,
 ) {
-    val state = this
-    LaunchedEffect(state, page) {
-        if (state.targetPage != page) {
-            state.animateScrollToPage(page)
-        }
-    }
+   val state = this
+   LaunchedEffect(state, page) {
+      if (state.targetPage != page) {
+         state.animateScrollToPage(page)
+      }
+   }
 }
 
 /**
@@ -50,15 +50,15 @@ fun PagerState.fAnimateScrollToPage(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PagerState.fCurrentPage(
-    onChange: (Int) -> Unit,
+   onChange: (Int) -> Unit,
 ) {
-    val state = this
-    val onChangeUpdated by rememberUpdatedState(onChange)
-    LaunchedEffect(state) {
-        snapshotFlow { state.currentPage }.collect {
-            onChangeUpdated(it)
-        }
-    }
+   val state = this
+   val onChangeUpdated by rememberUpdatedState(onChange)
+   LaunchedEffect(state) {
+      snapshotFlow { state.currentPage }.collect {
+         onChangeUpdated(it)
+      }
+   }
 }
 
 /**
@@ -68,13 +68,13 @@ fun PagerState.fCurrentPage(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PagerState.fSettledPage(
-    onChange: (Int) -> Unit,
+   onChange: (Int) -> Unit,
 ) {
-    val state = this
-    val onChangeUpdated by rememberUpdatedState(onChange)
-    LaunchedEffect(state) {
-        snapshotFlow { state.settledPage }.collect {
-            onChangeUpdated(it)
-        }
-    }
+   val state = this
+   val onChangeUpdated by rememberUpdatedState(onChange)
+   LaunchedEffect(state) {
+      snapshotFlow { state.settledPage }.collect {
+         onChangeUpdated(it)
+      }
+   }
 }

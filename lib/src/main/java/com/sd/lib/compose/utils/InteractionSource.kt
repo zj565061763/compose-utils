@@ -15,21 +15,21 @@ import androidx.compose.runtime.remember
  */
 @Composable
 fun InteractionSource.fCollectIsTouchedAsState(): State<Boolean> {
-    val isTouched = remember { mutableStateOf(false) }
-    LaunchedEffect(this) {
-        val listInteraction = mutableListOf<Interaction>()
-        interactions.collect { interaction ->
-            when (interaction) {
-                is PressInteraction.Press -> listInteraction.add(interaction)
-                is PressInteraction.Release -> listInteraction.remove(interaction.press)
-                is PressInteraction.Cancel -> listInteraction.remove(interaction.press)
+   val isTouched = remember { mutableStateOf(false) }
+   LaunchedEffect(this) {
+      val listInteraction = mutableListOf<Interaction>()
+      interactions.collect { interaction ->
+         when (interaction) {
+            is PressInteraction.Press -> listInteraction.add(interaction)
+            is PressInteraction.Release -> listInteraction.remove(interaction.press)
+            is PressInteraction.Cancel -> listInteraction.remove(interaction.press)
 
-                is DragInteraction.Start -> listInteraction.add(interaction)
-                is DragInteraction.Stop -> listInteraction.remove(interaction.start)
-                is DragInteraction.Cancel -> listInteraction.remove(interaction.start)
-            }
-            isTouched.value = listInteraction.isNotEmpty()
-        }
-    }
-    return isTouched
+            is DragInteraction.Start -> listInteraction.add(interaction)
+            is DragInteraction.Stop -> listInteraction.remove(interaction.start)
+            is DragInteraction.Cancel -> listInteraction.remove(interaction.start)
+         }
+         isTouched.value = listInteraction.isNotEmpty()
+      }
+   }
+   return isTouched
 }

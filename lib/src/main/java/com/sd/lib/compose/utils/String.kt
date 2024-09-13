@@ -20,40 +20,40 @@ import androidx.compose.ui.platform.LocalContext
  */
 @Composable
 fun fString(vararg items: Any): String {
-    val resources = resources()
-    return when (items.size) {
-        0 -> ""
-        1 -> items.first().anyToString(resources)
-        else -> {
-            var result by remember { mutableStateOf(items.itemsToString(resources)) }
-            LaunchedEffect(items) {
-                result = items.itemsToString(resources)
-            }
-            result
-        }
-    }
+   val resources = resources()
+   return when (items.size) {
+      0 -> ""
+      1 -> items.first().anyToString(resources)
+      else -> {
+         var result by remember { mutableStateOf(items.itemsToString(resources)) }
+         LaunchedEffect(items) {
+            result = items.itemsToString(resources)
+         }
+         result
+      }
+   }
 }
 
 private fun Array<*>.itemsToString(resources: Resources): String {
-    return buildString {
-        for (item in this@itemsToString) {
-            append(item.anyToString(resources))
-        }
-    }
+   return buildString {
+      for (item in this@itemsToString) {
+         append(item.anyToString(resources))
+      }
+   }
 }
 
 private fun Any?.anyToString(resources: Resources): String {
-    return when (this) {
-        null -> ""
-        is String -> this
-        is Int -> resources.getString(this)
-        else -> this.toString()
-    }
+   return when (this) {
+      null -> ""
+      is String -> this
+      is Int -> resources.getString(this)
+      else -> this.toString()
+   }
 }
 
 @Composable
 @ReadOnlyComposable
 private fun resources(): Resources {
-    LocalConfiguration.current
-    return LocalContext.current.resources
+   LocalConfiguration.current
+   return LocalContext.current.resources
 }

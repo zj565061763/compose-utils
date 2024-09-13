@@ -14,32 +14,32 @@ import androidx.compose.ui.draw.clipToBounds
  */
 @Composable
 fun <T> FCarouselVertical(
-    modifier: Modifier = Modifier,
-    /** 切换动画时长 */
-    duration: Int = 1000,
-    /** 目标 */
-    target: T,
-    /** 内容 */
-    content: @Composable (target: T) -> Unit,
+   modifier: Modifier = Modifier,
+   /** 切换动画时长 */
+   duration: Int = 1000,
+   /** 目标 */
+   target: T,
+   /** 内容 */
+   content: @Composable (target: T) -> Unit,
 ) {
-    AnimatedContent(
-        modifier = modifier.clipToBounds(),
-        targetState = target,
-        label = "FCarouselVertical",
-        contentAlignment = Alignment.Center,
-        transitionSpec = {
-            ContentTransform(
-                targetContentEnter = slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Up,
-                    animationSpec = tween(duration),
-                ),
-                initialContentExit = slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Up,
-                    animationSpec = tween(duration),
-                ),
-            )
-        },
-    ) { targetState ->
-        content(targetState)
-    }
+   AnimatedContent(
+      modifier = modifier.clipToBounds(),
+      targetState = target,
+      label = "FCarouselVertical",
+      contentAlignment = Alignment.Center,
+      transitionSpec = {
+         ContentTransform(
+            targetContentEnter = slideIntoContainer(
+               towards = AnimatedContentTransitionScope.SlideDirection.Up,
+               animationSpec = tween(duration),
+            ),
+            initialContentExit = slideOutOfContainer(
+               towards = AnimatedContentTransitionScope.SlideDirection.Up,
+               animationSpec = tween(duration),
+            ),
+         )
+      },
+   ) { targetState ->
+      content(targetState)
+   }
 }
