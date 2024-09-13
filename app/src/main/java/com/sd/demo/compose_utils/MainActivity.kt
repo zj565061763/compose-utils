@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                   SampleAnnotatedTarget::class.java,
                   SampleCarousel::class.java,
                   SampleClick::class.java,
+                  SampleConstrainLayout::class.java,
                ),
                onClickActivity = {
                   startActivity(Intent(this, it))

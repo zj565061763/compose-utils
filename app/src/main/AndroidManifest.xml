@@ -25,6 +25,7 @@
         <activity android:name=".SampleAnnotatedTarget" />
         <activity android:name=".SampleCarousel" />
         <activity android:name=".SampleClick" />
+        <activity android:name=".SampleConstrainLayout" />
 
     </application>
 
