@@ -20,6 +20,8 @@ fun <T, V : AnimationVector> Animatable<T, V>.fRepeat(
    onStart: suspend Animatable<T, V>.() -> Unit = {},
    /** 结束回调 */
    onFinish: suspend Animatable<T, V>.() -> Unit = {},
+   /** 最终回调 */
+   onFinally: Animatable<T, V>.() -> Unit = {},
    /** 重复回调 */
    onRepeat: suspend Animatable<T, V>.() -> Unit,
 ) {
@@ -28,17 +30,22 @@ fun <T, V : AnimationVector> Animatable<T, V>.fRepeat(
    val countUpdated by rememberUpdatedState(count)
    val onStartUpdated by rememberUpdatedState(onStart)
    val onFinishUpdated by rememberUpdatedState(onFinish)
+   val onFinallyUpdated by rememberUpdatedState(onFinally)
    val onRepeatUpdated by rememberUpdatedState(onRepeat)
 
    LaunchedEffect(this) {
-      onStartUpdated()
+      try {
+         onStartUpdated()
 
-      var current = 0
-      while (current < countUpdated) {
-         onRepeatUpdated()
-         current++
+         var current = 0
+         while (current < countUpdated) {
+            onRepeatUpdated()
+            current++
+         }
+
+         onFinishUpdated()
+      } finally {
+         onFinallyUpdated()
       }
-
-      onFinishUpdated()
    }
 }
