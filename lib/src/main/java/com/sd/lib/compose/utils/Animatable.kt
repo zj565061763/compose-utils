@@ -32,7 +32,10 @@ fun Modifier.fFlicker(
    onFinish: suspend Animatable<Float, AnimationVector1D>.() -> Unit = {},
 ): Modifier = if (flicker) {
    composed {
-      val animatable = remember(initialAlpha) { Animatable(initialAlpha) }
+      val animatable = remember {
+         // initialAlpha不作为remember的key，只允许初始化的时候设置一次
+         Animatable(initialAlpha)
+      }
       animatable.fRepeat(
          count = repeatCount,
          onRepeat = onRepeat,
