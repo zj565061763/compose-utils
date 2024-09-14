@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
             Content(
                listActivity = listOf(
                   SampleAnnotatedTarget::class.java,
-                  SampleCarousel::class.java,
                   SampleClick::class.java,
                   SampleConstrainLayout::class.java,
                   SampleFlicker::class.java,
