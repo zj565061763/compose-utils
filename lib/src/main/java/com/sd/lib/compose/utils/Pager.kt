@@ -71,11 +71,11 @@ fun PagerState.fSettledPage(onChange: (Int) -> Unit) {
 }
 
 /**
- * 轮播
+ * 自动播放
  */
 @SuppressLint("ComposableNaming")
 @Composable
-fun PagerState.fLoopPlay(
+fun PagerState.fAutoPlay(
    interval: Long = 3000,
    atLeastState: Lifecycle.State = Lifecycle.State.STARTED,
    getNextPage: PagerState.() -> Int = { (currentPage + 1).takeIf { it < pageCount } ?: 0 },
