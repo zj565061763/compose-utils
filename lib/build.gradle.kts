@@ -44,14 +44,14 @@ dependencies {
    implementation(libs.androidx.compose.foundation)
 }
 
-afterEvaluate {
-   publishing {
-      publications {
-         create<MavenPublication>("release") {
+publishing {
+   publications {
+      create<MavenPublication>("release") {
+         groupId = libGroupId
+         artifactId = libArtifactId
+         version = libVersion
+         afterEvaluate {
             from(components["release"])
-            groupId = libGroupId
-            artifactId = libArtifactId
-            version = libVersion
          }
       }
    }
