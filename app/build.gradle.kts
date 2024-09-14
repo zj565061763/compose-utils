@@ -50,7 +50,6 @@ dependencies {
    implementation(libs.androidx.compose.material.icons.core)
 
    implementation(libs.androidx.activity.compose)
-   implementation(libs.androidx.constraintlayout.compose)
 
    implementation(libs.androidx.lifecycle.viewmodelCompose)
    implementation(libs.androidx.lifecycle.runtimeCompose)
