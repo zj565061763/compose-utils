@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
                   SampleCarousel::class.java,
                   SampleClick::class.java,
                   SampleConstrainLayout::class.java,
+                  SampleFlicker::class.java,
                ),
                onClickActivity = {
                   startActivity(Intent(this, it))

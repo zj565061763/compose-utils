@@ -26,6 +26,7 @@
         <activity android:name=".SampleCarousel" />
         <activity android:name=".SampleClick" />
         <activity android:name=".SampleConstrainLayout" />
+        <activity android:name=".SampleFlicker" />
 
     </application>
 
