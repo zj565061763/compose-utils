@@ -98,7 +98,10 @@ fun PagerState.fAutoPlay(
    LaunchedEffect(state, lifecycle) {
       while (true) {
          delay(intervalUpdated)
-         lifecycle.fAtLeastState(atLeastStateUpdated)
+
+         if (!lifecycle.fAtLeastState(atLeastStateUpdated)) {
+            delay(intervalUpdated)
+         }
 
          val nextPage = getNextPageUpdated()
          state.animateScrollToPage(nextPage)

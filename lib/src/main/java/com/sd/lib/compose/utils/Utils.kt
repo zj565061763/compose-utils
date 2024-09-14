@@ -7,9 +7,9 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.resume
 
-internal suspend fun Lifecycle.fAtLeastState(state: Lifecycle.State) {
+internal suspend fun Lifecycle.fAtLeastState(state: Lifecycle.State): Boolean {
    if (currentState == Lifecycle.State.DESTROYED) throw CancellationException()
-   if (currentState.isAtLeast(state)) return
+   if (currentState.isAtLeast(state)) return true
    suspendCancellableCoroutine { continuation ->
       val observer = object : LifecycleEventObserver {
          override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
@@ -22,4 +22,5 @@ internal suspend fun Lifecycle.fAtLeastState(state: Lifecycle.State) {
       addObserver(observer)
       continuation.invokeOnCancellation { removeObserver(observer) }
    }
+   return false
 }
