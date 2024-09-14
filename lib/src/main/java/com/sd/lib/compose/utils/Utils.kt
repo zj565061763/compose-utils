@@ -7,7 +7,9 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.resume
 
-internal suspend fun Lifecycle.fAtLeastState(state: Lifecycle.State): Boolean {
+internal suspend fun Lifecycle.fAtLeastState(
+   state: Lifecycle.State = Lifecycle.State.STARTED,
+): Boolean {
    if (currentState == Lifecycle.State.DESTROYED) throw CancellationException()
    if (currentState.isAtLeast(state)) return true
    suspendCancellableCoroutine { continuation ->

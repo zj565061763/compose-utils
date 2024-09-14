@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlinx.coroutines.delay
 
 /**
@@ -25,9 +26,15 @@ fun <T> FCarouselVertical(
    /** 内容 */
    content: @Composable (target: T) -> Unit,
 ) {
+   val lifecycle = LocalLifecycleOwner.current.lifecycle
    fLoopTarget(
       list = list,
-      onLoop = { delay(interval) },
+      onLoop = {
+         delay(interval)
+         if (!lifecycle.fAtLeastState()) {
+            delay(interval)
+         }
+      },
    ).value?.let { target ->
       FCarouselVertical(
          modifier = modifier,

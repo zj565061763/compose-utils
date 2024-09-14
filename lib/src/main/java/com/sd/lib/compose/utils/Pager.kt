@@ -8,7 +8,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlinx.coroutines.delay
 
@@ -77,7 +76,6 @@ fun PagerState.fSettledPage(onChange: (Int) -> Unit) {
 @Composable
 fun PagerState.fAutoPlay(
    interval: Long = 3000,
-   atLeastState: Lifecycle.State = Lifecycle.State.STARTED,
    getNextPage: PagerState.() -> Int = { (currentPage + 1).takeIf { it < pageCount } ?: 0 },
 ) {
    val state = this
@@ -91,7 +89,6 @@ fun PagerState.fAutoPlay(
    }
 
    val intervalUpdated by rememberUpdatedState(interval)
-   val atLeastStateUpdated by rememberUpdatedState(atLeastState)
    val getNextPageUpdated by rememberUpdatedState(getNextPage)
 
    val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -99,7 +96,7 @@ fun PagerState.fAutoPlay(
       while (true) {
          delay(intervalUpdated)
 
-         if (!lifecycle.fAtLeastState(atLeastStateUpdated)) {
+         if (!lifecycle.fAtLeastState()) {
             delay(intervalUpdated)
          }
 
