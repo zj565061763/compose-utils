@@ -8,12 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.cancellation.CancellationException
-import kotlin.coroutines.resume
 
 /**
  * 生命周期大于等于[atLeastState]时循环返回[list]的项
@@ -44,22 +39,5 @@ fun <T> fLoopTarget(
             }
          }
       }
-   }
-}
-
-private suspend fun Lifecycle.fAtLeastState(state: Lifecycle.State) {
-   if (currentState == Lifecycle.State.DESTROYED) throw CancellationException()
-   if (currentState.isAtLeast(state)) return
-   suspendCancellableCoroutine { continuation ->
-      val observer = object : LifecycleEventObserver {
-         override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-            if (event.targetState >= state) {
-               removeObserver(this)
-               continuation.resume(Unit)
-            }
-         }
-      }
-      addObserver(observer)
-      continuation.invokeOnCancellation { removeObserver(observer) }
    }
 }
