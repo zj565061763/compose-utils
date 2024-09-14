@@ -63,11 +63,12 @@ private fun Content(
       ButtonsRow(
          count = 10,
          selectedTabIndex = selectedIndex,
-      ) {
-         coroutineScope.launch {
-            state.animateScrollToPage(it)
-         }
-      }
+         onClick = {
+            coroutineScope.launch {
+               state.animateScrollToPage(it)
+            }
+         },
+      )
 
       PagerView(
          modifier = Modifier.weight(1f),
