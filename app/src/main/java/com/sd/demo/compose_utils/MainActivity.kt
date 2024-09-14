@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity() {
                   SampleClick::class.java,
                   SampleConstrainLayout::class.java,
                   SampleFlicker::class.java,
+                  SamplePager::class.java,
                   SampleString::class.java,
                ),
                onClickActivity = {
