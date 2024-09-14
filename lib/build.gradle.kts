@@ -40,7 +40,6 @@ kotlin {
 
 dependencies {
    implementation(libs.androidx.compose.foundation)
-   implementation(libs.androidx.constraintlayout.compose)
 }
 
 afterEvaluate {

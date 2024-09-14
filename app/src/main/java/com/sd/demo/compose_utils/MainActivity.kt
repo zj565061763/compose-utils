@@ -30,7 +30,6 @@ class MainActivity : ComponentActivity() {
                listActivity = listOf(
                   SampleAnnotatedTarget::class.java,
                   SampleClick::class.java,
-                  SampleConstrainLayout::class.java,
                   SampleFlicker::class.java,
                   SamplePager::class.java,
                   SampleString::class.java,

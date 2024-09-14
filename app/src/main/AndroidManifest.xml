@@ -24,7 +24,6 @@
 
         <activity android:name=".SampleAnnotatedTarget" />
         <activity android:name=".SampleClick" />
-        <activity android:name=".SampleConstrainLayout" />
         <activity android:name=".SampleFlicker" />
         <activity android:name=".SampleString" />
         <activity android:name=".SamplePager" />
