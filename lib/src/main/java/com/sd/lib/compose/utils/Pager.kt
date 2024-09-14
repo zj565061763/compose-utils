@@ -95,7 +95,6 @@ fun PagerState.fAutoPlay(
    LaunchedEffect(state, lifecycle) {
       while (true) {
          delay(intervalUpdated)
-
          if (!lifecycle.fAtLeastState()) {
             delay(intervalUpdated)
          }
