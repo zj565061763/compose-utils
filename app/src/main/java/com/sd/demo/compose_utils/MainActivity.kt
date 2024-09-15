@@ -28,9 +28,7 @@ class MainActivity : ComponentActivity() {
          AppTheme {
             Content(
                listActivity = listOf(
-                  SampleAnnotatedTarget::class.java,
                   SampleClick::class.java,
-                  SampleFlicker::class.java,
                   SamplePager::class.java,
                   SampleString::class.java,
                ),
