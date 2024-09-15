@@ -2,12 +2,8 @@ package com.sd.lib.compose.utils
 
 import android.content.res.Resources
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 
@@ -25,11 +21,7 @@ fun fString(vararg items: Any?): String {
       1 -> items.first().anyToString(fResources())
       else -> {
          val resources = fResources()
-         var result by remember { mutableStateOf(items.itemsToString(resources)) }
-         LaunchedEffect(items) {
-            result = items.itemsToString(resources)
-         }
-         result
+         return remember(resources, items) { items.itemsToString(resources) }
       }
    }
 }
