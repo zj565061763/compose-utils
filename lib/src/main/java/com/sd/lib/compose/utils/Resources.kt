@@ -37,18 +37,23 @@ fun fResources(): Resources {
 }
 
 private fun Array<*>.itemsToString(resources: Resources): String {
+   val items = this
    return buildString {
-      for (item in this@itemsToString) {
+      for (item in items) {
          append(item.anyToString(resources))
       }
    }
 }
 
 private fun Any?.anyToString(resources: Resources): String {
-   return when (this) {
+   return when (val any = this) {
       null -> ""
-      is String -> this
-      is Int -> resources.getString(this)
-      else -> this.toString()
+      is String -> any
+      is Int -> try {
+         resources.getString(any)
+      } catch (e: Resources.NotFoundException) {
+         any.toString()
+      }
+      else -> any.toString()
    }
 }
