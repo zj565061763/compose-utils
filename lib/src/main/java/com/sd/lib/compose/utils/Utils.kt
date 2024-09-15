@@ -15,7 +15,7 @@ internal suspend fun Lifecycle.fAtLeastState(
    suspendCancellableCoroutine { continuation ->
       val observer = object : LifecycleEventObserver {
          override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-            if (event.targetState >= state) {
+            if (event.targetState.isAtLeast(state)) {
                removeObserver(this)
                continuation.resume(Unit)
             }
