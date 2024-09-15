@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
  * 把[items]拼接为字符串，如果[items]为空返回空字符串，[items]内容对应的字符串规则如下：
  * * null -> 空字符串
  * * String -> 字符串本身
- * * Int -> 当作字符串资源ID读取字符串
+ * * Int -> 当作字符串资源ID读取字符串，如果资源ID不存在则转为字符串
  * * 其他 -> 调用对象的toString()
  */
 @Composable
