@@ -26,9 +26,9 @@ fun <T> fFlowStateWithLifecycle(
    }
 
    val coroutineScope = rememberCoroutineScope()
-   val scopeImpl = remember { GetFlowScopeImpl(coroutineScope) }
+   val scopeImpl = remember(coroutineScope) { GetFlowScopeImpl(coroutineScope) }
 
-   return remember {
+   return remember(scopeImpl) {
       with(scopeImpl) { getFlow() }
    }.collectAsStateWithLifecycle()
 }
