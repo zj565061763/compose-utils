@@ -25,13 +25,13 @@ val PaddingValues.bottom: Dp
    @Composable @ReadOnlyComposable get() = calculateBottomPadding()
 
 val PaddingValues.start: Dp
-   @Composable get() {
+   @Composable @ReadOnlyComposable get() {
       val layoutDirection = LocalLayoutDirection.current
       return calculateStartPadding(layoutDirection)
    }
 
 val PaddingValues.end: Dp
-   @Composable get() {
+   @Composable @ReadOnlyComposable get() {
       val layoutDirection = LocalLayoutDirection.current
       return calculateEndPadding(layoutDirection)
    }
