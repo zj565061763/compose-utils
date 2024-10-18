@@ -26,24 +26,28 @@ fun <T> fFlowStateWithLifecycle(
    }
 
    val coroutineScope = rememberCoroutineScope()
-   val scopeImpl = remember(coroutineScope) { GetFlowScopeImpl(coroutineScope) }
-
-   return remember(scopeImpl) {
-      with(scopeImpl) { getFlow() }
+   return remember(coroutineScope) {
+      with(GetFlowScopeImpl(coroutineScope)) { getFlow() }
    }.collectAsStateWithLifecycle()
 }
 
 interface GetFlowScope {
-   fun <T> Flow<T>.asStateFlow(initialValue: T): StateFlow<T>
+   fun <T> Flow<T>.asStateFlow(
+      initialValue: T,
+      started: SharingStarted = SharingStarted.Eagerly,
+   ): StateFlow<T>
 }
 
 private class GetFlowScopeImpl(
    private val coroutineScope: CoroutineScope,
 ) : GetFlowScope {
-   override fun <T> Flow<T>.asStateFlow(initialValue: T): StateFlow<T> {
+   override fun <T> Flow<T>.asStateFlow(
+      initialValue: T,
+      started: SharingStarted,
+   ): StateFlow<T> {
       return stateIn(
          scope = coroutineScope,
-         started = SharingStarted.Eagerly,
+         started = started,
          initialValue = initialValue,
       )
    }
