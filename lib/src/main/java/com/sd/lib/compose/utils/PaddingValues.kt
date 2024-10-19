@@ -4,38 +4,31 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 
 @Composable
-@ReadOnlyComposable
-operator fun PaddingValues.plus(paddingValues: PaddingValues): PaddingValues {
+operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
+   val layoutDirection = LocalLayoutDirection.current
    return PaddingValues(
-      top = this.fTop() + paddingValues.fTop(),
-      bottom = this.fBottom() + paddingValues.fBottom(),
-      start = this.fStart() + paddingValues.fStart(),
-      end = this.fEnd() + paddingValues.fEnd(),
+      top = this.fTop() + other.fTop(),
+      bottom = this.fBottom() + other.fBottom(),
+      start = this.fStart(layoutDirection) + other.fStart(layoutDirection),
+      end = this.fEnd(layoutDirection) + other.fEnd(layoutDirection),
    )
 }
 
-@Composable
-@ReadOnlyComposable
 fun PaddingValues.fTop(): Dp = calculateTopPadding()
 
-@Composable
-@ReadOnlyComposable
 fun PaddingValues.fBottom(): Dp = calculateBottomPadding()
 
 @Composable
-@ReadOnlyComposable
 fun PaddingValues.fStart(
    layoutDirection: LayoutDirection = LocalLayoutDirection.current,
 ): Dp = calculateStartPadding(layoutDirection)
 
 @Composable
-@ReadOnlyComposable
 fun PaddingValues.fEnd(
    layoutDirection: LayoutDirection = LocalLayoutDirection.current,
 ): Dp = calculateEndPadding(layoutDirection)
