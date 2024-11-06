@@ -47,13 +47,13 @@ private fun Array<*>.itemsToString(resources: Resources): String {
 
 private fun Any?.anyToString(resources: Resources): String {
    return when (val any = this) {
-      null -> ""
-      is String -> any
       is Int -> try {
          resources.getString(any)
       } catch (e: Resources.NotFoundException) {
          any.toString()
       }
+      is String -> any
+      null -> ""
       else -> any.toString()
    }
 }
