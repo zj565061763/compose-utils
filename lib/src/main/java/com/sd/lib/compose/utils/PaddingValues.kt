@@ -14,8 +14,8 @@ operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
    return PaddingValues(
       top = this.calculateTopPadding() + other.calculateTopPadding(),
       bottom = this.calculateBottomPadding() + other.calculateBottomPadding(),
-      start = this.fCalculateStartPadding(layoutDirection) + other.fCalculateStartPadding(layoutDirection),
-      end = this.fCalculateEndPadding(layoutDirection) + other.fCalculateEndPadding(layoutDirection),
+      start = this.calculateStartPadding(layoutDirection) + other.calculateStartPadding(layoutDirection),
+      end = this.calculateEndPadding(layoutDirection) + other.calculateEndPadding(layoutDirection),
    )
 }
 
