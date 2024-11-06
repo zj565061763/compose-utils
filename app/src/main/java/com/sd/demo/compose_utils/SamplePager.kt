@@ -134,10 +134,11 @@ private fun PagerView(
    state: PagerState,
 ) {
    state.FCurrentPage {
-      logMsg { "fCurrentPage:$it" }
+      logMsg { "currentPage:$it" }
    }
+
    state.FSettledPage {
-      logMsg { "fSettledPage:$it" }
+      logMsg { "settledPage:$it" }
    }
 
    HorizontalPager(
