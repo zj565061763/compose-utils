@@ -33,7 +33,6 @@ class SampleClick : ComponentActivity() {
    }
 }
 
-
 @Composable
 private fun Content(
    modifier: Modifier = Modifier,

@@ -25,6 +25,7 @@
         <activity android:name=".SampleClick" />
         <activity android:name=".SampleString" />
         <activity android:name=".SamplePager" />
+        <activity android:name=".SampleRememberUpdatedState" />
 
     </application>
 
