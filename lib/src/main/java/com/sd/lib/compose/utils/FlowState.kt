@@ -34,7 +34,7 @@ fun <T> fFlowStateWithLifecycle(
 interface GetFlowScope {
    fun <T> Flow<T>.asStateFlow(
       initialValue: T,
-      started: SharingStarted = SharingStarted.Eagerly,
+      started: SharingStarted = SharingStarted.Lazily,
    ): StateFlow<T>
 }
 
