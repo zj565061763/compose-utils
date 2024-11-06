@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
                   SampleClick::class.java,
                   SamplePager::class.java,
                   SampleString::class.java,
-                  SampleRememberUpdatedState::class.java,
                ),
                onClickActivity = {
                   startActivity(Intent(this, it))
