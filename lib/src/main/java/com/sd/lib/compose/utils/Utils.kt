@@ -7,6 +7,7 @@ import kotlin.coroutines.cancellation.CancellationException
 internal suspend fun Lifecycle.fAtLeastState(
    state: Lifecycle.State = Lifecycle.State.STARTED,
 ): Boolean {
+   require(state != Lifecycle.State.DESTROYED)
    if (currentState == Lifecycle.State.DESTROYED) throw CancellationException()
    if (currentState.isAtLeast(state)) return true
    currentStateFlow.first { it.isAtLeast(state) }
