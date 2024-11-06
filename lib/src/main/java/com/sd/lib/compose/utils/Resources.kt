@@ -18,9 +18,9 @@ import androidx.compose.ui.platform.LocalContext
 fun fString(vararg items: Any?): String {
    return when (items.size) {
       0 -> ""
-      1 -> items.first().anyToString(fResources())
+      1 -> items.first().anyToString(resources())
       else -> {
-         val resources = fResources()
+         val resources = resources()
          return remember(resources, items) { items.itemsToString(resources) }
       }
    }
@@ -31,7 +31,7 @@ fun fString(vararg items: Any?): String {
  */
 @Composable
 @ReadOnlyComposable
-fun fResources(): Resources {
+private fun resources(): Resources {
    LocalConfiguration.current
    return LocalContext.current.resources
 }
