@@ -45,7 +45,7 @@ fun PagerState.FSettledPage(onChange: (Int) -> Unit) {
  */
 @Composable
 fun PagerState.FAutoPlay(
-   interval: Long = 3000,
+   getInterval: () -> Long = { 3000 },
    getNextPage: PagerState.() -> Int = { (currentPage + 1).takeIf { it < pageCount } ?: 0 },
 ) {
    val state = this
@@ -58,15 +58,15 @@ fun PagerState.FAutoPlay(
       return
    }
 
-   val intervalUpdated by rememberUpdatedState(interval)
+   val getIntervalUpdated by rememberUpdatedState(getInterval)
    val getNextPageUpdated by rememberUpdatedState(getNextPage)
 
    val lifecycleOwner = LocalLifecycleOwner.current
    LaunchedEffect(state, lifecycleOwner) {
       while (true) {
-         delay(intervalUpdated)
+         delay(getIntervalUpdated())
          if (!lifecycleOwner.lifecycle.fAtLeastState()) {
-            delay(intervalUpdated)
+            delay(getIntervalUpdated())
          }
 
          val nextPage = getNextPageUpdated()
