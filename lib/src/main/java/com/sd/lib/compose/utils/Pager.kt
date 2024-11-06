@@ -61,11 +61,11 @@ fun PagerState.FAutoPlay(
    val intervalUpdated by rememberUpdatedState(interval)
    val getNextPageUpdated by rememberUpdatedState(getNextPage)
 
-   val lifecycle = LocalLifecycleOwner.current.lifecycle
-   LaunchedEffect(state, lifecycle) {
+   val lifecycleOwner = LocalLifecycleOwner.current
+   LaunchedEffect(state, lifecycleOwner) {
       while (true) {
          delay(intervalUpdated)
-         if (!lifecycle.fAtLeastState()) {
+         if (!lifecycleOwner.lifecycle.fAtLeastState()) {
             delay(intervalUpdated)
          }
 
