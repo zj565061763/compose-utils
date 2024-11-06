@@ -21,7 +21,9 @@ fun fString(vararg items: Any?): String {
       1 -> items.first().anyToString(resources())
       else -> {
          val resources = resources()
-         return remember(resources, items) { items.itemsToString(resources) }
+         remember(resources, items) {
+            items.itemsToString(resources)
+         }
       }
    }
 }
