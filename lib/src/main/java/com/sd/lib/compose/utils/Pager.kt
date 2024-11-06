@@ -1,6 +1,5 @@
 package com.sd.lib.compose.utils
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
@@ -44,9 +43,8 @@ fun PagerState.FSettledPage(onChange: (Int) -> Unit) {
 /**
  * 自动播放
  */
-@SuppressLint("ComposableNaming")
 @Composable
-fun PagerState.fAutoPlay(
+fun PagerState.FAutoPlay(
    interval: Long = 3000,
    getNextPage: PagerState.() -> Int = { (currentPage + 1).takeIf { it < pageCount } ?: 0 },
 ) {

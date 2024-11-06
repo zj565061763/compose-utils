@@ -28,9 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sd.demo.compose_utils.ui.theme.AppTheme
-import com.sd.lib.compose.utils.fAutoPlay
-import com.sd.lib.compose.utils.fCurrentPage
-import com.sd.lib.compose.utils.fSettledPage
+import com.sd.lib.compose.utils.FAutoPlay
+import com.sd.lib.compose.utils.FCurrentPage
+import com.sd.lib.compose.utils.FSettledPage
 import kotlinx.coroutines.launch
 
 class SamplePager : ComponentActivity() {
@@ -51,7 +51,7 @@ private fun Content(
    var selectedIndex by remember { mutableIntStateOf(0) }
 
    val state = rememberPagerState { 10 }
-   state.fCurrentPage { selectedIndex = it }
+   state.FCurrentPage { selectedIndex = it }
 
    val coroutineScope = rememberCoroutineScope()
 
@@ -100,7 +100,7 @@ private fun AutoPlay(
    }
 
    if (autoPlay) {
-      state.fAutoPlay()
+      state.FAutoPlay()
    }
 }
 
@@ -133,10 +133,10 @@ private fun PagerView(
    modifier: Modifier = Modifier,
    state: PagerState,
 ) {
-   state.fCurrentPage {
+   state.FCurrentPage {
       logMsg { "fCurrentPage:$it" }
    }
-   state.fSettledPage {
+   state.FSettledPage {
       logMsg { "fSettledPage:$it" }
    }
 
