@@ -12,60 +12,32 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlinx.coroutines.delay
 
 /**
- * 滚动到指定[page]
- */
-@SuppressLint("ComposableNaming")
-@Composable
-fun PagerState.fScrollToPage(page: Int) {
-   val state = this
-   LaunchedEffect(state, page) {
-      if (state.targetPage != page) {
-         state.scrollToPage(page)
-      }
-   }
-}
-
-/**
- * 动画滚动到指定[page]
- */
-@SuppressLint("ComposableNaming")
-@Composable
-fun PagerState.fAnimateScrollToPage(page: Int) {
-   val state = this
-   LaunchedEffect(state, page) {
-      if (state.targetPage != page) {
-         state.animateScrollToPage(page)
-      }
-   }
-}
-
-/**
  * 监听[PagerState.currentPage]
  */
-@SuppressLint("ComposableNaming")
 @Composable
-fun PagerState.fCurrentPage(onChange: (Int) -> Unit) {
+fun PagerState.FCurrentPage(onChange: (Int) -> Unit) {
    val state = this
    val onChangeUpdated by rememberUpdatedState(onChange)
    LaunchedEffect(state) {
-      snapshotFlow { state.currentPage }.collect {
-         onChangeUpdated(it)
-      }
+      snapshotFlow { state.currentPage }
+         .collect {
+            onChangeUpdated(it)
+         }
    }
 }
 
 /**
  * 监听[PagerState.settledPage]
  */
-@SuppressLint("ComposableNaming")
 @Composable
-fun PagerState.fSettledPage(onChange: (Int) -> Unit) {
+fun PagerState.FSettledPage(onChange: (Int) -> Unit) {
    val state = this
    val onChangeUpdated by rememberUpdatedState(onChange)
    LaunchedEffect(state) {
-      snapshotFlow { state.settledPage }.collect {
-         onChangeUpdated(it)
-      }
+      snapshotFlow { state.settledPage }
+         .collect {
+            onChangeUpdated(it)
+         }
    }
 }
 
