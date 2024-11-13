@@ -28,7 +28,46 @@ fun <T> fFlowStateWithLifecycle(
 
    val coroutineScope = rememberCoroutineScope()
    val getFlowUpdated by rememberUpdatedState(getFlow)
-   return remember(coroutineScope) {
+   return remember(Unit) {
+      with(GetFlowScopeImpl(coroutineScope)) { getFlowUpdated() }
+   }.collectAsStateWithLifecycle()
+}
+
+@Composable
+fun <T> fFlowStateWithLifecycle(
+   inspectionValue: T,
+   key1: Any?,
+   getFlow: GetFlowScope.() -> StateFlow<T>,
+): State<T> {
+   if (LocalInspectionMode.current) {
+      return remember(inspectionValue) {
+         mutableStateOf(inspectionValue)
+      }
+   }
+
+   val coroutineScope = rememberCoroutineScope()
+   val getFlowUpdated by rememberUpdatedState(getFlow)
+   return remember(key1) {
+      with(GetFlowScopeImpl(coroutineScope)) { getFlowUpdated() }
+   }.collectAsStateWithLifecycle()
+}
+
+@Composable
+fun <T> fFlowStateWithLifecycle(
+   inspectionValue: T,
+   key1: Any?,
+   key2: Any?,
+   getFlow: GetFlowScope.() -> StateFlow<T>,
+): State<T> {
+   if (LocalInspectionMode.current) {
+      return remember(inspectionValue) {
+         mutableStateOf(inspectionValue)
+      }
+   }
+
+   val coroutineScope = rememberCoroutineScope()
+   val getFlowUpdated by rememberUpdatedState(getFlow)
+   return remember(key1, key2) {
       with(GetFlowScopeImpl(coroutineScope)) { getFlowUpdated() }
    }.collectAsStateWithLifecycle()
 }
