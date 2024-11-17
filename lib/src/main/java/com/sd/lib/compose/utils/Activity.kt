@@ -3,6 +3,7 @@ package com.sd.lib.compose.utils
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,7 +22,13 @@ fun <T> android.app.Activity.fIntentExtra(
          addOnNewIntentListener(consumer)
          onDispose { removeOnNewIntentListener(consumer) }
       }
-
    }
    return remember(intentState) { getExtra(intentState) }
+}
+
+@Composable
+fun android.app.Activity.FFinish() {
+   LaunchedEffect(this) {
+      finish()
+   }
 }
