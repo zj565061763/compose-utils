@@ -42,6 +42,7 @@ android {
 
 dependencies {
    implementation(libs.androidx.compose.foundation)
+   compileOnly(libs.androidx.core)
 }
 
 publishing {
