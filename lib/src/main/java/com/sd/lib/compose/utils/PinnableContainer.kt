@@ -7,7 +7,7 @@ import androidx.compose.ui.layout.LocalPinnableContainer
 import androidx.compose.ui.layout.PinnableContainer.PinnedHandle
 
 @Composable
-fun pin(): PinnedHandle? {
+fun fPin(): PinnedHandle? {
    val container = LocalPinnableContainer.current
    val pinnedHandle = remember(container) { container?.pin() }
    if (pinnedHandle != null) {
